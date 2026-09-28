@@ -125,8 +125,13 @@ async function deviceFlow(options) {
 			headers: JSON_HEADERS,
 			body: JSON.stringify({ client_id: appKey, device_code: deviceCode })
 		});
-		if (tokenRes.status >= 400) throw new Error(friendlyError(tokenRes.status, tokenRes.text));
-		const step = deviceStep(JSON.parse(tokenRes.text));
+		let body = null;
+		try {
+			body = JSON.parse(tokenRes.text);
+		} catch (parseError) {
+			throw new Error(friendlyError(tokenRes.status, tokenRes.text));
+		}
+		const step = deviceStep(body);
 		if (step.type === "granted") return { granted: true, accessToken: step.accessToken };
 		if (step.type === "pending") continue;
 		if (step.type === "slow_down") { interval += 5; continue; }

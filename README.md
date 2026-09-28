@@ -57,9 +57,10 @@ verification_uri joining), command registration, cursor insertion, vault folder 
 embed syntax, and the low-balance / missing-auth notices. The live suite (with
 `POLLINATIONS_API_KEY` in the environment) verified: text generation
 (`"Pollen works"` via `/v1/chat/completions`), a 192 KB JPEG decoded from a real `b64_json`
-response, and both live model catalogs. The device-flow endpoints are verified by the state
-machine tests plus a live reachability/shape check against `enter.pollinations.ai`; a full
-end-to-end sign-in needs a registered `pk_` App Key.
+response, and both live model catalogs. The device-flow endpoints are verified live against `enter.pollinations.ai`: the code
+endpoint issues a real `device_code`/`user_code`, and polling returns `authorization_pending`
+(HTTP 400, as documented) until approval - the state machine was fixed against that real shape.
+A full end-to-end sign-in needs a registered `pk_` App Key.
 
 ## License
 

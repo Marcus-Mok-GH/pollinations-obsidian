@@ -59,8 +59,8 @@ async function testDeviceFlow() {
 			return { status: 200, text: JSON.stringify({ device_code: "dc1", user_code: "ABCD-EFGH", verification_uri: "/device", interval: 5, expires_in: 600 }) };
 		}
 		seen.tokenBodies.push(body);
-		if (seen.tokenBodies.length === 1) return { status: 200, text: JSON.stringify({ error: "authorization_pending" }) };
-		if (seen.tokenBodies.length === 2) return { status: 200, text: JSON.stringify({ error: "slow_down" }) };
+		if (seen.tokenBodies.length === 1) return { status: 400, text: JSON.stringify({ error: "authorization_pending" }) };
+		if (seen.tokenBodies.length === 2) return { status: 400, text: JSON.stringify({ error: "slow_down" }) };
 		return { status: 200, text: JSON.stringify({ access_token: "sk_live_token" }) };
 	};
 	let sleeps = [];
