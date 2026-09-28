@@ -1,0 +1,9 @@
+{
+  "id": "pollinations",
+  "name": "Pollinations",
+  "version": "1.0.0",
+  "minAppVersion": "1.4.0",
+  "description": "Generate text and images with Pollinations inside your notes, paying with your own Pollen.",
+  "author": "Marcus Mok",
+  "isDesktopOnly": false
+}
